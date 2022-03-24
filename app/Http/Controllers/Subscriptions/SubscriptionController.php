@@ -14,7 +14,13 @@ class SubscriptionController extends Controller
 
     public function index()
     {
-        return view('subscriptions.index');
+        //verifica se o usuário é assinante.
+        if (auth()->user()->subscribed('default'))
+            return redirect()->route('subscriptions.premium');
+
+        return view('subscriptions.index', [
+            'intent' => auth()->user()->createSetupIntent(),
+        ]);
     }
 
     public function store(Request $request)
@@ -29,6 +35,9 @@ class SubscriptionController extends Controller
 
     public function premium()
     {
+        if (!auth()->user()->subscribed('default'))
+            return redirect()->route('subscriptions.checkout');
+
         return view('subscriptions.premium');
     }
 
