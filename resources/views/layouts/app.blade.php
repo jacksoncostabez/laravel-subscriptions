@@ -18,6 +18,7 @@
 
         {{-- Lib Strie --}}
         <script src="https://js.stripe.com/v3/"></script>
+
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100">
