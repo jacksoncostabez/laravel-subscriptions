@@ -39,6 +39,7 @@ class SubscriptionController extends Controller
         return view('subscriptions.premium');
     }
 
+    //retorna as faturas pagas
     public function account()
     {
         $invoices = auth()->user()->invoices();
@@ -46,12 +47,29 @@ class SubscriptionController extends Controller
         return view('subscriptions.account', compact('invoices'));
     }
 
+    //gera a fatura do produto adquirido
     public function invoiceDownload($idInvoice)
     {
         return Auth::user()->downloadInvoice($idInvoice, [
             'vendor' => config('app.name'),
             'product' => 'Assinatura VIP'
         ]);
+    }
+
+    //cancela o plano
+    public function cancel()
+    {
+        auth()->user()->subscription('default')->cancel();
+
+        return redirect()->route('subscriptions.account');
+    }
+
+    //reativa o plano cancelado.
+    public function resume()
+    {
+        auth()->user()->subscription('default')->resume();
+
+        return redirect()->route('subscriptions.account');
     }
 
 }
