@@ -24,7 +24,7 @@
                                     @endif
                                 </div>
                                 <div class="card__price"><span class="price-currency mr-2">R$</span> <span
-                                        class="price-value">{{ $plan->price }}</span> <span
+                                        class="price-value">{{ $plan->getPriceBrAttibute() }}</span> <span
                                         class="price-period"><span class="px-1">/</span><span
                                             x-text="translate()">Mês</span></span></div>
                             </div>
@@ -47,7 +47,7 @@
                                 @endforeach
 
                             </div>
-                            <div class="card__footer text-center my-4"><a href="#"
+                            <div class="card__footer text-center my-4"><a href="{{ route('choice.plan', $plan->url) }}"
                                     class="button button--filled button--primary">Assinar Agora Mesmo<svg
                                         class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                                         xmlns="http://www.w3.org/2000/svg">
